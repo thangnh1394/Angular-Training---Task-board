@@ -1,39 +1,64 @@
 <div class="board-container">
-  <!-- Header -->
   <header class="board-header">
     <h1>Task Board</h1>
-    <button class="btn-add">+ Add Task</button>
+    <button class="btn-add" (click)="onAddTask()">+ Add Task</button>
   </header>
 
-  <!-- Board with 3 columns -->
   <main class="board">
-    <!-- To Do Column -->
     <div class="column">
       <div class="column-header todo">
-        <h2>To Do</h2>
+        <h2>To Do ({{ this.todoTasks.length }})</h2>
       </div>
       <div class="column-content">
+        @if(todoTasks.length > 0) { @for (task of this.todoTasks; track task.id) {
+        <div class="task-card">
+          <h3>{{ task.title }}</h3>
+          @if (task.description) {
+          <p>{{ task.description }}</p>
+          }
+          <span class="priority" [class]="task.priority">{{ task.priority }}</span>
+        </div>
+        } } @else {
         <p class="empty-message">No tasks yet</p>
+        }
       </div>
     </div>
 
-    <!-- TODO: Add "In Progress" column -->
     <div class="column">
       <div class="column-header in-progress">
-        <h2>In Progress</h2>
+        <h2>In Progress ({{ this.inProgressTasks.length }})</h2>
       </div>
       <div class="column-content">
+        @if(this.inProgressTasks.length > 0){ @for (task of this.inProgressTasks; track task.id) {
+        <div class="task-card">
+          <h3>{{ task.title }}</h3>
+          @if(task.description) {
+          <p>{{ task.description }}</p>
+          }
+          <span class="priority" [class]="task.priority">{{ task.priority }}</span>
+        </div>
+        } } @else {
         <p class="empty-message">No tasks yet</p>
+        }
       </div>
     </div>
 
-    <!-- TODO: Add "Done" column -->
     <div class="column">
       <div class="column-header done">
-        <h2>Done</h2>
+        <h2>Done ({{ this.doneTasks.length }})</h2>
       </div>
       <div class="column-content">
+        @if(this.doneTasks.length > 0){ @for (task of this.doneTasks; track task.id ) {
+        <div class="task-card">
+          <h3>{{ task.title }}</h3>
+          @if(task.description) {
+          <p>{{ task.description }}</p>
+          }
+          <span class="priority" [class]="task.priority">{{ task.priority }}</span>
+        </div>
+        } } @else {
         <p class="empty-message">No tasks yet</p>
+        }
       </div>
     </div>
   </main>
