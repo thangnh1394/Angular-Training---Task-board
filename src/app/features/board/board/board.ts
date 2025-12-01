@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Task } from '../../../core/models/task.model';
+import { Column } from '../components/column/column';
 
 @Component({
   selector: 'app-board',
-  imports: [],
+  imports: [Column],
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })
@@ -64,5 +65,16 @@ export class Board {
 
   onAddTask() {
     alert('Add task button clicked!');
+  }
+
+  onEditTask(task: Task) {
+    alert(`Edit task: ${task.title}`);
+  }
+
+  onDeleteTask(taskId: string) {
+    const confirmed = confirm('Are you sure you want to delete this task?');
+    if (confirmed) {
+      this.tasks = this.tasks.filter((t) => t.id !== taskId);
+    }
   }
 }

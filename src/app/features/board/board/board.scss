@@ -1,6 +1,6 @@
 .board-container {
-    margin-left: 5rem;
-    margin-right: 5rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 
 .board {
@@ -12,41 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.board-header .btn-add {
-    max-height: 40px;
-}
-
-.column {
-  flex: 1;  /* Equal width */
-}
-
-.column-header {
-  padding: 0.75rem 1rem;
-}
-
-.column-header h2 {
-  margin: 0;
-  color: white;
-  font-size: 1.1rem;
-}
-
-.column-header.todo { background: #4a90a4; }
-.column-header.in-progress { background: #f5a623; }
-.column-header.done { background: #7cb342; }
-
-.column-content {
-  min-height: 400px;
-  background: #f0f0f0;
-  padding: 1rem;
-  border-radius: 0 0 8px 8px;
-}
-
-.empty-message {
-  color: #888;
-  text-align: center;
-  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 .btn-add {
@@ -62,46 +28,6 @@
   background: #4a5ab9;
 }
 
-.task-card {
-  background: white;
-  border-radius: 8px;
-  padding:  1rem;
-  margin-bottom: 0.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-
-  h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1rem;
-    color: #333;
-  }
-
-  p {
-    margin: 0 0 0.75rem 0;
-    font-size: 0.875rem;
-    color: #333;
-  }
-}
-
-.priority {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: uppercase;
-}
-
-.priority.high {
-  background: #ffebee;
-  color: #c62828;
-}
-
-.priority.medium {
-  background: #fff3e0;
-  color: #ef6c00;
-}
-
-.priority.low {
-  background: #e8f5e9;
-  color: #2e7d32;
+.column {
+  flex: 1;
 }
