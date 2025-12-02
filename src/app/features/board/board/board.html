@@ -8,7 +8,7 @@
     <app-column
       title="To Do"
       status="to-do"
-      [tasks]="todoTasks"
+      [tasks]="todoTasks()"
       (editTask)="onEditTask($event)"
       (deleteTask)="onDeleteTask($event)"
     />
@@ -16,7 +16,7 @@
     <app-column
       title="In Progress"
       status="in-progress"
-      [tasks]="inProgressTasks"
+      [tasks]="inProgressTasks()"
       (editTask)="onEditTask($event)"
       (deleteTask)="onDeleteTask($event)"
     />
@@ -24,7 +24,7 @@
     <app-column
       title="Done"
       status="done"
-      [tasks]="doneTasks"
+      [tasks]="doneTasks()"
       (editTask)="onEditTask($event)"
       (deleteTask)="onDeleteTask($event)"
     />

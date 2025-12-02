@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Task } from '../../../core/models/task.model';
 import { Column } from '../components/column/column';
+import { TaskService } from '../../../core/services/task.service';
 
 @Component({
   selector: 'app-board',
@@ -9,62 +10,19 @@ import { Column } from '../components/column/column';
   styleUrl: './board.scss',
 })
 export class Board {
-  tasks: Task[] = [
-    {
-      id: '1',
-      title: 'Learn Angular basics',
-      description: 'Study components, templates, and data binding',
-      status: 'done',
-      priority: 'high',
-      createdAt: new Date('2024-01-10'),
-    },
-    {
-      id: '2',
-      title: 'Build task board UI',
-      description: 'Create the board layout with columns',
-      status: 'in-progress',
-      priority: 'high',
-      createdAt: new Date('2024-01-11'),
-    },
-    {
-      id: '3',
-      title: 'Add drag and drop',
-      description: 'Implement drag and drop between columns',
-      status: 'to-do',
-      priority: 'medium',
-      createdAt: new Date('2024-01-12'),
-    },
-    {
-      id: '4',
-      title: 'Connect to API',
-      description: 'Integrate with .NET backend',
-      status: 'to-do',
-      priority: 'low',
-      createdAt: new Date('2024-01-13'),
-    },
-    {
-      id: '5',
-      title: 'Write unit tests',
-      status: 'to-do',
-      priority: 'medium',
-      createdAt: new Date('2024-01-14'),
-    },
-  ];
+  private taskService = inject(TaskService);
 
-  get todoTasks(): Task[] {
-    return this.tasks.filter((t) => t.status === 'to-do');
-  }
-
-  get inProgressTasks(): Task[] {
-    return this.tasks.filter((t) => t.status === 'in-progress');
-  }
-
-  get doneTasks(): Task[] {
-    return this.tasks.filter((t) => t.status === 'done');
-  }
+  todoTasks = this.taskService.todoTasks;
+  inProgressTasks = this.taskService.inProgressTasks;
+  doneTasks = this.taskService.doneTasks;
 
   onAddTask() {
-    alert('Add task button clicked!');
+    this.taskService.addTask({
+      title: 'New Task ' + Date.now(),
+      description: 'This is a new task',
+      status: 'to-do',
+      priority: 'medium',
+    });
   }
 
   onEditTask(task: Task) {
@@ -74,7 +32,7 @@ export class Board {
   onDeleteTask(taskId: string) {
     const confirmed = confirm('Are you sure you want to delete this task?');
     if (confirmed) {
-      this.tasks = this.tasks.filter((t) => t.id !== taskId);
+      this.taskService.deleteTask(taskId);
     }
   }
 }
