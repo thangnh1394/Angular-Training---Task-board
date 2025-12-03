@@ -30,3 +30,11 @@
     />
   </main>
 </div>
+
+@if (showForm) {
+  <app-task-form
+    [task]="editingTask"
+    (save)="onSaveTask($event)"
+    (cancel)="closeForm()"
+  />
+}

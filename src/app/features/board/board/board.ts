@@ -1,11 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { Task } from '../../../core/models/task.model';
-import { Column } from '../components/column/column';
 import { TaskService } from '../../../core/services/task.service';
+import { Column } from '../components/column/column';
+import { TaskForm } from '../components/task-form/task-form';
 
 @Component({
   selector: 'app-board',
-  imports: [Column],
+  standalone: true,
+  imports: [Column, TaskForm],
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })
@@ -16,17 +18,26 @@ export class Board {
   inProgressTasks = this.taskService.inProgressTasks;
   doneTasks = this.taskService.doneTasks;
 
+  showForm = false;
+  editingTask: Task | null = null;
+
   onAddTask() {
-    this.taskService.addTask({
-      title: 'New Task ' + Date.now(),
-      description: 'This is a new task',
-      status: 'to-do',
-      priority: 'medium',
-    });
+    this.editingTask = null;
+    this.showForm = true;
   }
 
   onEditTask(task: Task) {
-    alert(`Edit task: ${task.title}`);
+    this.editingTask = task;
+    this.showForm = true;
+  }
+
+  onSaveTask(taskData: Omit<Task, 'id' | 'createdAt'>) {
+    if (this.editingTask) {
+      this.taskService.updateTask(this.editingTask.id, taskData);
+    } else {
+      this.taskService.addTask(taskData);
+    }
+    this.closeForm();
   }
 
   onDeleteTask(taskId: string) {
@@ -34,5 +45,10 @@ export class Board {
     if (confirmed) {
       this.taskService.deleteTask(taskId);
     }
+  }
+
+  closeForm() {
+    this.showForm = false;
+    this.editingTask = null;
   }
 }
